@@ -11,7 +11,7 @@ import nf4.ui.*;
 import nf4.effects.particles.*;
 import nf4.util.*;
 
-import states.game.PlayState;
+// import states.game.*;
 
 import ui.*;
 
@@ -40,7 +40,7 @@ class MenuState extends FlxState
 
 		bgColor = Registry.backgroundColor;
 
-		titleTx = new SBNFText(0, 0, "Angry Wizard", 84);
+		titleTx = new SBNFText(0, 0, "RocketFighters", 84);
 		titleTx.color = Registry.foregroundAccentColor;
 		titleTx.screenCenter(FlxAxes.X);
 		titleTx.y = -titleTx.height;
@@ -142,7 +142,7 @@ class MenuState extends FlxState
 		FlxTween.tween(distortedTitle, { alpha: 1 }, 0.9, { ease: FlxEase.cubeIn });
 		// switch
 		FlxG.camera.fade(Registry.washoutColor, 0.8, false, function () {
-			FlxG.switchState(new PlayState());
+			// FlxG.switchState(new PlayState());
 		});
 	}
 
