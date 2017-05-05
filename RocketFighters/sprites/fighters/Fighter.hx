@@ -9,7 +9,7 @@ import sprites.*;
 class Fighter extends GamePresence {
 
     public var movementSpeed:Float = 6;
-    public var airResistanceMultiplier:Float = 0.7;
+    public var airResistanceMultiplier:Float = 0.87;
     public var jumpVelocity:Float = 294;
 
     public function new(?X:Float = 0, ?Y:Float = 0) {
