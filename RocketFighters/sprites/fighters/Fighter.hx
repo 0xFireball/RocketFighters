@@ -8,6 +8,8 @@ import sprites.*;
 
 class Fighter extends GamePresence {
 
+    public var movementSpeed:Float = 5;
+
     public function new(?X:Float = 0, ?Y:Float = 0) {
         super(X, Y);
 
@@ -17,7 +19,7 @@ class Fighter extends GamePresence {
     public override function update(dt:Float) {
         movement();
 
-        super.update();
+        super.update(dt);
     }
     
     private function movement() {
