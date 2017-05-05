@@ -1,0 +1,3 @@
+[submodule "RocketFighters/lib/nf4"]
+	path = RocketFighters/lib/nf4
+	url = https://gitlab.com/0xFireball/nf4_flixel.git
