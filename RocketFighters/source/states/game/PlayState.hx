@@ -8,8 +8,12 @@ import flixel.tile.*;
 
 import mapping.*;
 
+import sprites.fighters.*;
+
 class PlayState extends FlxState {
     public static var gameZoom = 1.0;
+
+    public var player:PlayerFighter;
 
     public var level:GameLevel;
     public var mapLoader:GameMapLoader = new GameMapLoader();
@@ -24,10 +28,13 @@ class PlayState extends FlxState {
         bgColor = Registry.backgroundColor;
 
         level = mapLoader.loadMap("lbp_stage", this);
-
         addLevel(level);
 
-        // FlxG.camera.follow(player, PLATFORMER, 1.0);
+        player = new PlayerFighter();
+        spawnFighter(player);
+        add(player);
+
+        FlxG.camera.follow(player, PLATFORMER, 1.0);
         FlxG.camera.zoom = gameZoom;
 
         FlxG.camera.fade(Registry.washoutColor, 1.1, true);
@@ -49,6 +56,12 @@ class PlayState extends FlxState {
 		remove(CurrentLevel.foregroundTiles);
     }
 
+    public function spawnFighter(fighter:Fighter) {
+        // get available spawners, and randomly pick one
+        var targetSpawnerPos = level.spawnerPositions[Std.int(Math.random() * level.spawnerPositions.length)];
+        fighter.setPosition(targetSpawnerPos.x, targetSpawnerPos.y);
+    }
+
     public override function update(dt:Float) {
         #if !FLX_NO_KEYBOARD
         // pause menu
@@ -66,12 +79,19 @@ class PlayState extends FlxState {
         #end
 
         // Collide with foreground tile layer
-		// level.collideWithLevel(player);
+		level.collideWithLevel(player);
 
         super.update(dt);
     }
 
     private function openPause() {
         openSubState(new PauseSubState(Registry.unfocusColor));
+    }
+
+    public override function destroy() {
+        if (level != null) level.destroy();
+        level = null;
+
+        super.destroy();
     }
 }

@@ -18,6 +18,8 @@ import sprites.magic.*;
 
 class GameLevel extends TiledLevel {
 
+	public var spawnerPositions:Array<FlxPoint> = new Array<FlxPoint>();
+
     public function new(tiledLevel:FlxTiledMapAsset, tiledRootPath:String, state:PlayState) {
 		super(tiledLevel, tiledRootPath);
         
@@ -95,7 +97,7 @@ class GameLevel extends TiledLevel {
 		switch (o.type.toLowerCase()) {
 			case "spawner":
 				// create spawner
-				// ... TODO
+				spawnerPositions.push(FlxPoint.get(x, y));
 			// case "exit":
 			// 	// Create the level exit
 			// 	var exit = new FlxSprite(x, y);
@@ -104,6 +106,16 @@ class GameLevel extends TiledLevel {
 			// 	state.exit = exit;
 			// 	group.add(exit);
 		}
+	}
+
+	public function destroy() {
+		for (pos in spawnerPositions) {
+			if (pos != null) {
+				pos.put();
+				pos = null;
+			}
+		}
+		spawnerPositions = null;
 	}
 
 }
