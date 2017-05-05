@@ -23,11 +23,11 @@ class PlayState extends FlxState {
 
         bgColor = Registry.backgroundColor;
 
-        level = mapLoader.loadMap("start_area", this);
+        level = mapLoader.loadMap("lbp_stage", this);
 
         addLevel(level);
 
-        FlxG.camera.follow(player, PLATFORMER, 1.0);
+        // FlxG.camera.follow(player, PLATFORMER, 1.0);
         FlxG.camera.zoom = gameZoom;
 
         FlxG.camera.fade(Registry.washoutColor, 1.1, true);
@@ -66,7 +66,7 @@ class PlayState extends FlxState {
         #end
 
         // Collide with foreground tile layer
-		level.collideWithLevel(player);
+		// level.collideWithLevel(player);
 
         super.update(dt);
     }

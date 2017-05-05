@@ -91,27 +91,11 @@ class GameLevel extends TiledLevel {
 		// objects in tiled are aligned bottom-left (top-left in flixel)
 		if (o.gid != -1)
 			y -= g.map.getGidOwner(o.gid).tileHeight;
-
-        switch (o.name.toLowerCase()) {
-            case "default_spawn":
-                // this is where the player should spawn if they have not yet been placed
-                state.player.setPosition(x, y);
-        }
 		
 		switch (o.type.toLowerCase()) {
-			case "warp":
-				// warps between maps
-				var mapLink = new MapLink(x, y);
-				// load the target
-				mapLink.targetMapName = o.properties.get("target");
-				var destPosRaw = o.properties.get("warp_pos");
-				if (destPosRaw != null) {
-					var destPosStr = destPosRaw.split(':');
-					var destX = Std.parseInt(destPosStr[0]);
-					var destY = Std.parseInt(destPosStr[1]);
-					mapLink.warpDestination = FlxPoint.get(destX, destY);
-				}
-				state.mapLinks.add(mapLink);
+			case "spawner":
+				// create spawner
+				// ... TODO
 			// case "exit":
 			// 	// Create the level exit
 			// 	var exit = new FlxSprite(x, y);

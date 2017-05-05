@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="0.18.1901" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" nextobjectid="10">
+ <tileset firstgid="1" source="tilesets/rocketfighters_terrain.tsx"/>
+ <layer name="terrain" width="60" height="60">
+  <properties>
+   <property name="tilesheet" value="rocketfighters_terrain"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmsEKwjAQRAMKtUL9/881goGytFRJM6sz82DJoYd1+ypmGudSyr3WLLIutR5Ca5ubneiXHfvlxn65sV9u7Jcb++VG3W92TkPlQJVcGOe81LqG9d9rPU+ce1pdu/3AZ+2tOM+W3+l9jYU2z55fplkbba4tv6y8ZlP//WXHfrnJ8hv3eei+aL9xn4fua79jUfF7lNdQ/VH3+Sivofp/en+z83rv8/Gt3+y83vt8eH/Fjf1yY7/c2C836n5H7ePOJvv8CM1Z50fsqH9/2bFfbuyXG79/xqDy/rlhv9i+Pl8YQ3buUPkf4V4uVFmfiiMkjg==
+  </data>
+ </layer>
+ <layer name="landscape" width="60" height="60">
+  <properties>
+   <property name="nocollide" value=""/>
+   <property name="tilesheet" value="rocketfighters_terrain"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACAQA0B7Bd1/Wt3AFy3kuYPUIW1KAQAAAAAAAIipKy1Rz05fGYl6AAAAAADghV9+/FvRHVl+/Cw7ODMB05QA2Q==
+  </data>
+ </layer>
+ <objectgroup name="objects">
+  <properties>
+   <property name="tilesheet" value="rocketfighters_terrain"/>
+  </properties>
+  <object id="6" type="spawner" gid="18" x="672" y="512" width="16" height="16"/>
+  <object id="7" type="spawner" gid="18" x="256" y="512" width="16" height="16"/>
+  <object id="8" type="spawner" gid="18" x="64" y="928" width="16" height="16"/>
+  <object id="9" type="spawner" gid="18" x="864" y="928" width="16" height="16"/>
+ </objectgroup>
+</map>
