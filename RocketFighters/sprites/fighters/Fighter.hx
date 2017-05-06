@@ -12,6 +12,8 @@ class Fighter extends GamePresence {
     public var airResistanceMultiplier:Float = 0.75;
     public var jumpVelocity:Float = 180;
 
+    public var jumpThrusting:Bool = false;
+
     public function new(?X:Float = 0, ?Y:Float = 0) {
         super(X, Y);
 
@@ -29,8 +31,9 @@ class Fighter extends GamePresence {
         setFacingFlip(FlxObject.RIGHT, false, false);
 
         animation.add("n", [0]);
-        animation.add("f", [1], 24);
-        animation.add("lr", [2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3], 24);
+        animation.add("f", [1]);
+        animation.add("lr", [2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2], 24);
+        animation.add("jt", [10, 1, 10]);
     }
 
     public override function update(dt:Float) {
@@ -74,6 +77,9 @@ class Fighter extends GamePresence {
             // jump
             if (upKey && touchingGround) {
                 velocity.y -= jumpVelocity;
+                jumpThrusting = true;
+            } else if (jumpThrusting) {
+                jumpThrusting = false;
             }
             // now move
         }
@@ -91,6 +97,10 @@ class Fighter extends GamePresence {
             animation.play("f");
         } else {
             animation.play("n");
+        }
+
+        if (jumpThrusting && movingSide) {
+            animation.play("jt");
         }
     }
 
