@@ -12,7 +12,7 @@ class GamePresence extends NFSprite {
         super(X, Y);
 
         // set game acceleration
-        acceleration.set(0, 160);
+        acceleration.set(0, 240);
         maxVelocity.set(400, 400);
         drag.set(200, 200);
     }
