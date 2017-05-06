@@ -9,11 +9,13 @@ import flixel.tile.*;
 import mapping.*;
 
 import sprites.fighters.*;
+import sprites.things.*;
 
 class PlayState extends FlxState {
     public static var gameZoom = 1.0;
 
     public var player:PlayerFighter;
+    public var fighters:FlxTypedGroup<Fighter>;
 
     public var level:GameLevel;
     public var mapLoader:GameMapLoader = new GameMapLoader();
@@ -30,9 +32,12 @@ class PlayState extends FlxState {
         level = mapLoader.loadMap("lbp_stage", this);
         addLevel(level);
 
+        fighters = new FlxTypedGroup<Fighter>();
+        add(fighters);
+
         player = new PlayerFighter();
         spawnFighter(player);
-        add(player);
+        fighters.add(player);
 
         FlxG.camera.follow(player, PLATFORMER, 1.0);
         FlxG.camera.zoom = gameZoom;
@@ -79,7 +84,14 @@ class PlayState extends FlxState {
         #end
 
         // Collide with foreground tile layer
-		level.collideWithLevel(player);
+        fighters.forEachExists(function (fighter) {
+            level.collideWithLevel(fighter);
+        });
+
+        // Collide with Things
+        FlxG.overlap(fighters, level.objectsLayer, function (f:Fighter, thing:MapThing) {
+            thing.hitFighter(f);
+        });
 
         super.update(dt);
     }

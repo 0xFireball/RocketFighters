@@ -14,7 +14,8 @@ import haxe.io.Path;
 
 import states.game.*;
 
-import sprites.magic.*;
+import sprites.fighters.*;
+import sprites.things.*;
 
 class GameLevel extends TiledLevel {
 
@@ -98,6 +99,12 @@ class GameLevel extends TiledLevel {
 			case "spawner":
 				// create spawner
 				spawnerPositions.push(FlxPoint.get(x, y));
+			case "bouncer":
+				// create bouncer
+				var bouncer = new Bouncer(x, y);
+				bouncer.x += bouncer.width / 2;
+				bouncer.y += bouncer.height / 2;
+				group.add(bouncer);
 			// case "exit":
 			// 	// Create the level exit
 			// 	var exit = new FlxSprite(x, y);

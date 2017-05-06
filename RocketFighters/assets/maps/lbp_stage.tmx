@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="0.18.1901" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" nextobjectid="10">
+<map version="2017.05.02" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" nextobjectid="27">
  <tileset firstgid="1" source="tilesets/rocketfighters_terrain.tsx"/>
  <layer name="terrain" width="60" height="60">
   <properties>
@@ -15,7 +15,7 @@
    <property name="tilesheet" value="rocketfighters_terrain"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt2LEJACAQA0B7Bd1/Wt3AFy3kuYPUIW1KAQAAAAAAAIipKy1Rz05fGYl6AAAAAADghV9+/FvRHVl+/Cw7ODMB05QA2Q==
+   eJzt2DEKgDAMBdDuCrrp/U/aXEAbcaiG9+BPDQ3ZQloDAAAAAAAAyFkia6E+I1tkv3k/Imfin1HdqA8AAPNld7+/qDYPAABUdbW7z97pv3LHfys7R5U7fpU5eKYDORoB8w==
   </data>
  </layer>
  <objectgroup name="objects">
@@ -26,5 +26,11 @@
   <object id="7" type="spawner" gid="18" x="256" y="512" width="16" height="16"/>
   <object id="8" type="spawner" gid="18" x="64" y="928" width="16" height="16"/>
   <object id="9" type="spawner" gid="18" x="864" y="928" width="16" height="16"/>
+  <object id="18" type="bouncer" gid="22" x="888" y="692" width="16" height="16"/>
+  <object id="19" type="bouncer" gid="22" x="56" y="692" width="16" height="16"/>
+  <object id="20" type="bouncer" gid="22" x="424" y="900" width="16" height="16"/>
+  <object id="22" type="bouncer" gid="22" x="520" y="900" width="16" height="16"/>
+  <object id="23" type="bouncer" gid="22" x="392" y="516" width="16" height="16"/>
+  <object id="26" type="bouncer" gid="22" x="552" y="516" width="16" height="16"/>
  </objectgroup>
 </map>
