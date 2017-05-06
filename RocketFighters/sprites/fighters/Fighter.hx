@@ -20,7 +20,6 @@ class Fighter extends GamePresence {
 
     public var jumpThrusting:Bool = false;
 
-    private var sprayEmitter:FlxEmitter;
     private var effectEmitter:NFParticleEmitter;
 
     private var weapon:Weapon = null;
@@ -53,12 +52,6 @@ class Fighter extends GamePresence {
         animation.add("jt", [10, 1, 10]);
 
         // subsprites
-        sprayEmitter = new FlxEmitter(X, Y);
-		sprayEmitter.scale.set(2, 2, 10, 10);
-		sprayEmitter.lifespan.set(0.1, 0.7);
-		sprayEmitter.color.set(FlxColor.fromRGBFloat(0.0, 0.4, 0.6, 0.4), FlxColor.fromRGBFloat(0.4, 0.8, 1.0, 0.9));
-		sprayEmitter.makeParticles(1, 1, FlxColor.WHITE, 200);
-        subSprites.add(sprayEmitter);
 
         effectEmitter = new NFParticleEmitter(40);
         subSprites.add(effectEmitter);
@@ -76,7 +69,18 @@ class Fighter extends GamePresence {
         movement();
         animate();
 
+        updateItemPositions();
+
         super.update(dt);
+    }
+
+    private function updateItemPositions() {
+        // update positions of items
+        if (weapon != null) {
+            weapon.x = x - weapon.width / 2.5;
+            weapon.y = y + height / 2 - weapon.height / 2.6;
+        }
+        weapon.facing = facing;
     }
     
     private function movement() {

@@ -10,6 +10,8 @@ class Weapon extends FlxSprite {
         super(X, Y);
 
         // makeGraphic(40, 15, FlxColor.RED);
+        setFacingFlip(FlxObject.LEFT, false, false);
+        setFacingFlip(FlxObject.RIGHT, true, false);
     }
 
     public function fireFree(target:FlxPoint) {
