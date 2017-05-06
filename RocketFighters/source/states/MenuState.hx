@@ -77,10 +77,6 @@ class MenuState extends FlxState
 		settingsBtn.x = FlxG.width - (settingsBtn.width + 32);
 		add(settingsBtn);
 
-		var lvtx = new SBNFText(0, 410, "level " + Registry.gameLevel, 24);
-		lvtx.screenCenter(FlxAxes.X);
-		add(lvtx);
-
 		FlxTween.color(credits, 0.9, FlxColor.fromRGBFloat(0.8, 0.1, 0.1), FlxColor.fromRGBFloat(0.98, 0.98, 0.98), { startDelay: 0.6, ease: FlxEase.cubeInOut });
 
 		FlxG.camera.fade(Registry.backgroundColor, 1.1, true, function () {
