@@ -14,6 +14,7 @@ using nf4.math.NFMathExt;
 
 class Projectile extends NFSprite {
 	public var movementSpeed:Float = 100;
+    public var thrust:Float = 0;
 	public var target:NFSprite;
 
 	/**
@@ -47,7 +48,7 @@ class Projectile extends NFSprite {
 		explosionEmitter = new NFParticleEmitter(64);
 		life = Life;
 
-		mass = 500;
+		mass = 100;
 	}
 
 	override public function explode() {
@@ -106,6 +107,13 @@ class Projectile extends NFSprite {
 			finishExplode();
 		}
 
+        // accelerate
+        if (thrust > 0) {
+            var accelVec = velocity.toVector().normalize().scale(thrust * dt);
+            velocity.addPoint(accelVec);
+            accelVec.put();
+        }
+
 		super.update(dt);
 	}
 
@@ -135,8 +143,15 @@ class Projectile extends NFSprite {
 		}
 	}
 
+    public function splashExplode() {
+        // TODO: Deal splash damage
+        explode();
+    }
+
 	public function hitBoundary() {
-		dismantle(); // destroy silently instead of exploding
+		// dismantle(); // destroy silently instead of exploding
+        // explode when hit boundary, but don't hit sprites (until splash damage is implemented)
+        splashExplode();
 	}
 
 	override public function kill() {

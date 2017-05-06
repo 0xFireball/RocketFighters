@@ -137,8 +137,17 @@ class Fighter extends GamePresence {
         }
     }
 
-    private function primaryFire() {
-        // override this
+    private function primaryFire(?FireTarget:FlxPoint = null) {
+        // override this?
+        if (FireTarget != null) {
+            // update sprite state to reflect target
+            if (FireTarget.x < x) {
+                facing = FlxObject.LEFT;
+            } else if (FireTarget.x > x) {
+                facing = FlxObject.RIGHT;
+            }
+            weapon.fireFree(FireTarget);
+        }
     }
 
     private function animate() {

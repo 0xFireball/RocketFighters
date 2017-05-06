@@ -142,8 +142,7 @@ class TiledLevel extends TiledMap
 		}
 	}
 	
-	public function collideWithLevel(obj:FlxObject, ?notifyCallback:FlxObject->FlxObject->Void, ?processCallback:FlxObject->FlxObject->Bool):Bool
-	{
+	public function collideWithLevel(obj:FlxObject, ?notifyCallback:FlxObject->FlxObject->Void, ?processCallback:FlxObject->FlxObject->Bool):Bool {
 		if (collidableTileLayers == null)
 			return false;
 
@@ -152,6 +151,20 @@ class TiledLevel extends TiledMap
 			// IMPORTANT: Always collide the map with objects, not the other way around. 
 			//			  This prevents odd collision errors (collision separation code off by 1 px).
 			if (FlxG.overlap(map, obj, notifyCallback, processCallback != null ? processCallback : FlxObject.separate))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public function overlapWithLevel(obj:FlxObject):Bool {
+		if (collidableTileLayers == null)
+			return false;
+
+		for (map in collidableTileLayers)
+		{
+			if (map.overlaps(obj))
 			{
 				return true;
 			}

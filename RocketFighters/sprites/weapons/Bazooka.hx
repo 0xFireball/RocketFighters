@@ -33,10 +33,13 @@ class Bazooka extends Weapon {
 		var projectileSpread:Float = 10;
 		var fireVelocity = projectile.center.toVector()
 			.subtractPoint(target)
-			.rotate(FlxPoint.weak(0, 0), (180 - (spread / 2)) + (Math.random() * spread))
-			.toVector().normalize().scale(projectile.movementSpeed);
-		fireVelocity.put();
+			.rotate(FlxPoint.weak(0, 0), (180 - (spread / 2)) + (Math.random() * spread));
+        fireVelocity.y /= 12; // greatly shrink Y component
+        fireVelocity = fireVelocity
+            .toVector().normalize()
+            .scale(projectile.movementSpeed);
 		launchProjectile(projectile, fireVelocity.x, fireVelocity.y);
+		fireVelocity.put();
 		// apply recoil
 		carrier.velocity.addPoint(projectile.momentum.scale(1 / carrier.mass).negate());
         // smoke

@@ -38,6 +38,9 @@ class PlayState extends FlxState {
 
         stateData = new PlayStateData();
 
+        projectiles = new FlxTypedGroup<Projectile>();
+        stateData.projectiles = projectiles;
+
         var backdrop = new FlxBackdrop(AssetPaths.backdrop__png, 0.2, 0.2);
         add(backdrop);
 
@@ -53,9 +56,7 @@ class PlayState extends FlxState {
         fighters.add(player);
         stateData.player = player;
 
-        projectiles = new FlxTypedGroup<Projectile>();
         add(projectiles);
-        stateData.projectiles = projectiles;
 
         FlxG.camera.follow(player, PLATFORMER, 1.0);
         FlxG.camera.zoom = gameZoom;
@@ -110,6 +111,13 @@ class PlayState extends FlxState {
         FlxG.overlap(fighters, level.objectsLayer, function (f:Fighter, thing:MapThing) {
             thing.hitFighter(f);
         });
+
+        // Collide projectiles
+		projectiles.forEachAlive(function (pj) {
+            if (level.overlapWithLevel(pj)) {
+                pj.hitBoundary();
+            }
+		});
 
         super.update(dt);
     }

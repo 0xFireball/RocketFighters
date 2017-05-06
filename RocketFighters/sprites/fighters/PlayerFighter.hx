@@ -30,8 +30,9 @@ class PlayerFighter extends Fighter {
         this.moveDefault(upKey, leftKey, downKey, rightKey);
     }
 
-    private override function primaryFire() {
-        weapon.fireFree(FlxG.mouse.getPosition());
+    private override function primaryFire(?FireTarget:FlxPoint = null) {
+        var fireTarget = FlxG.mouse.getPosition();
+        super.primaryFire(fireTarget);
     }
 
 }
