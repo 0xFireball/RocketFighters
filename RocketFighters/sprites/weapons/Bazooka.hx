@@ -12,6 +12,10 @@ class Bazooka extends Weapon {
         loadGraphic(AssetPaths.rf_bazooka__png, true, 64, 64);
     }
 
+    public override function update(dt:Float) {
+        super.update(dt);
+    }
+
     public override function fireFree(target:FlxPoint) {
         
     }

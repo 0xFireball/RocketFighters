@@ -79,7 +79,9 @@ class Fighter extends GamePresence {
         if (weapon != null) {
             weapon.x = x - weapon.width / 2.5;
             weapon.y = y + height / 2 - weapon.height / 2.6;
-            weapon.facing = facing;
+            if (facing & FlxObject.LEFT > 0 || facing & FlxObject.RIGHT > 0) {
+                weapon.facing = facing;
+            }
         }
     }
     
