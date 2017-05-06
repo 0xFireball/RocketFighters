@@ -5,6 +5,7 @@ import flixel.util.*;
 import flixel.math.*;
 
 import nf4.*;
+import nf4.input.*;
 
 import states.game.data.*;
 
@@ -33,9 +34,10 @@ class PlayerFighter extends Fighter {
 
         #if !FLX_NO_GAMEPAD
         var gamepad = FlxG.gamepads.lastActive;
+        var nfGamepad = NFGamepad.get(gamepad);
         var stickDeadzone = 0.2;
         if (gamepad != null) {
-            var leftStick = FlxVector.get(gamepad.getXAxis(LEFT_ANALOG_STICK), gamepad.getYAxis(LEFT_ANALOG_STICK));
+            var leftStick = nfGamepad.getAxes(LEFT_ANALOG_STICK, stickDeadzone);
             // var rightStick = FlxVector.get(gamepad.getXAxis(LEFT_ANALOG_STICK), gamepad.getYAxis(LEFT_ANALOG_STICK));
             if (leftStick.length < stickDeadzone) { // enforce a small radial deadzone
                 leftStick.set(0, 0);
@@ -48,14 +50,28 @@ class PlayerFighter extends Fighter {
 
             leftStick.put();
         }
+        nfGamepad = null;
         #end
 
         this.moveDefault(upKey, leftKey, downKey, rightKey, primaryAction);
     }
 
     private override function primaryFire(?FireTarget:FlxPoint = null) {
-        var fireTarget = FlxG.mouse.getPosition();
-        super.primaryFire(fireTarget);
+        #if !FLX_NO_KEYBOARD
+        FireTarget = FlxG.mouse.getPosition();
+        #end
+        #if !FLX_NO_GAMEPAD
+        var gamepad = NFGamepad.get(FlxG.gamepads.lastActive);
+        var targetRadius:Float = 60; // pseudo-mouse position
+        var stickDeadzone = 0.2;
+        if (gamepad != null) {
+            var rightStick = gamepad.getAxes(RIGHT_ANALOG_STICK, stickDeadzone);
+            FireTarget = rightStick.scale(targetRadius);
+            rightStick.put();
+        }
+        gamepad = null;
+        #end
+        super.primaryFire(FireTarget);
     }
 
 }
