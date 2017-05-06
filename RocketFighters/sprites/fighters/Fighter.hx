@@ -61,7 +61,7 @@ class Fighter extends GamePresence {
 
     private function addWeapons() {
         // add bazooka
-        weapon = new Bazooka();
+        weapon = new Bazooka(this, 0.8, effectEmitter, stateData.projectiles);
         subSprites.add(weapon);
     }
 
@@ -127,7 +127,18 @@ class Fighter extends GamePresence {
         }
 
         // attack
-        // actioning = FlxG.keys.anyPressed([F]) && canAct;
+        var primaryAction:Bool = false;
+        #if !FLX_NO_KEYBOARD
+        primaryAction = FlxG.keys.anyPressed([F]);
+        #end
+        
+        if (primaryAction) {
+            primaryFire();
+        }
+    }
+
+    private function primaryFire() {
+        // override this
     }
 
     private function animate() {
