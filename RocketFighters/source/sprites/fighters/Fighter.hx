@@ -89,7 +89,7 @@ class Fighter extends GamePresence {
         // todo
     }
 
-    private function moveDefault(upKey:Bool, leftKey:Bool, downKey:Bool, rightKey:Bool) {
+    private function moveDefault(upKey:Bool, leftKey:Bool, downKey:Bool, rightKey:Bool, primaryAction:Bool) {
         if (upKey && downKey) upKey = downKey = false;
         if (leftKey && rightKey) leftKey = rightKey = false;
 
@@ -125,13 +125,8 @@ class Fighter extends GamePresence {
             }
             // now move
         }
-
-        // attack
-        var primaryAction:Bool = false;
-        #if !FLX_NO_KEYBOARD
-        primaryAction = FlxG.keys.anyPressed([F]);
-        #end
         
+        // attack
         if (primaryAction) {
             primaryFire();
         }
