@@ -5,6 +5,7 @@ import flixel.group.FlxGroup;
 import flixel.util.*;
 import flixel.math.*;
 import flixel.tile.*;
+import flixel.addons.display.*;
 
 import mapping.*;
 
@@ -28,6 +29,9 @@ class PlayState extends FlxState {
 		#end
 
         bgColor = Registry.backgroundColor;
+
+        var backdrop = new FlxBackdrop(AssetPaths.backdrop__png, 0.2, 0.2);
+        add(backdrop);
 
         level = mapLoader.loadMap("lbp_stage", this);
         addLevel(level);
