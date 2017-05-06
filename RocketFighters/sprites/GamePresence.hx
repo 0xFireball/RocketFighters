@@ -4,9 +4,7 @@ import flixel.*;
 import flixel.util.*;
 import flixel.math.*;
 
-import nf4.*;
-
-class GamePresence extends NFSprite {
+class GamePresence extends SuperSprite {
 
     public function new(?X:Float = 0, ?Y:Float = 0) {
         super(X, Y);
