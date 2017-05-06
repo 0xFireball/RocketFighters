@@ -9,8 +9,8 @@ import sprites.*;
 class Fighter extends GamePresence {
 
     public var movementSpeed:Float = 16;
-    public var airResistanceMultiplier:Float = 0.87;
-    public var jumpVelocity:Float = 220;
+    public var airResistanceMultiplier:Float = 0.75;
+    public var jumpVelocity:Float = 180;
 
     public function new(?X:Float = 0, ?Y:Float = 0) {
         super(X, Y);
@@ -24,10 +24,18 @@ class Fighter extends GamePresence {
         // setSize(7, 21);
         offset.set(26, 14);
         setSize(14, 42);
+
+        setFacingFlip(FlxObject.LEFT, true, false);
+        setFacingFlip(FlxObject.RIGHT, false, false);
+
+        animation.add("n", [0]);
+        animation.add("f", [1], 24);
+        animation.add("lr", [2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3], 24);
     }
 
     public override function update(dt:Float) {
         movement();
+        animate();
 
         super.update(dt);
     }
@@ -44,10 +52,14 @@ class Fighter extends GamePresence {
             facing = FlxObject.LEFT;
         } else if (rightKey) {
             facing = FlxObject.RIGHT;
-        } else if (downKey) {
+        } else {
             facing = FlxObject.DOWN;
+        }
+        // flags to face down or up
+        if (downKey) {
+            facing |= FlxObject.DOWN;
         } else if (upKey) {
-            facing = FlxObject.UP;
+            facing |= FlxObject.UP;
         }
 
         var tMoveSpeed = movementSpeed;
@@ -69,5 +81,18 @@ class Fighter extends GamePresence {
         // attack
         // actioning = FlxG.keys.anyPressed([F]) && canAct;
     }
+
+    private function animate() {
+        var movingSide = Math.abs(velocity.x) > 0;
+        var movingSideFaster = movingSide && Math.abs(velocity.x) >= movementSpeed * airResistanceMultiplier;
+        if (isTouching(FlxObject.DOWN) && movingSideFaster) {
+            animation.play("lr");
+        } else if (movingSide) {
+            animation.play("f");
+        } else {
+            animation.play("n");
+        }
+    }
+
 
 }
