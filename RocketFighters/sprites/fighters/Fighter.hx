@@ -79,8 +79,8 @@ class Fighter extends GamePresence {
         if (weapon != null) {
             weapon.x = x - weapon.width / 2.5;
             weapon.y = y + height / 2 - weapon.height / 2.6;
+            weapon.facing = facing;
         }
-        weapon.facing = facing;
     }
     
     private function movement() {
