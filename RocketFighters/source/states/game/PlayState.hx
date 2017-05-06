@@ -11,15 +11,21 @@ import mapping.*;
 
 import sprites.fighters.*;
 import sprites.things.*;
+import sprites.projectiles.*;
+
+import states.game.data.*;
 
 class PlayState extends FlxState {
     public static var gameZoom = 1.0;
 
     public var player:PlayerFighter;
     public var fighters:FlxTypedGroup<Fighter>;
+    public var projectiles:FlxTypedGroup<Projectile>;
 
     public var level:GameLevel;
     public var mapLoader:GameMapLoader = new GameMapLoader();
+
+    public var stateData:PlayStateData;
 
     public override function create() {
 
@@ -30,6 +36,8 @@ class PlayState extends FlxState {
 
         bgColor = Registry.backgroundColor;
 
+        stateData = new PlayStateData();
+
         var backdrop = new FlxBackdrop(AssetPaths.backdrop__png, 0.2, 0.2);
         add(backdrop);
 
@@ -38,10 +46,16 @@ class PlayState extends FlxState {
 
         fighters = new FlxTypedGroup<Fighter>();
         add(fighters);
+        stateData.fighters = fighters;
 
-        player = new PlayerFighter();
+        player = new PlayerFighter(stateData);
         spawnFighter(player);
         fighters.add(player);
+        stateData.player = player;
+
+        projectiles = new FlxTypedGroup<Projectile>();
+        add(projectiles);
+        stateData.projectiles = projectiles;
 
         FlxG.camera.follow(player, PLATFORMER, 1.0);
         FlxG.camera.zoom = gameZoom;
@@ -107,6 +121,9 @@ class PlayState extends FlxState {
     public override function destroy() {
         if (level != null) level.destroy();
         level = null;
+
+        stateData.destroy();
+        stateData = null;
 
         super.destroy();
     }

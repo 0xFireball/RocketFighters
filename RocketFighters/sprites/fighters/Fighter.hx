@@ -8,6 +8,9 @@ import flixel.effects.particles.*;
 import nf4.effects.particles.*;
 
 import sprites.*;
+import sprites.weapons.*;
+
+import states.game.data.*;
 
 class Fighter extends GamePresence {
 
@@ -20,13 +23,19 @@ class Fighter extends GamePresence {
     private var sprayEmitter:FlxEmitter;
     private var effectEmitter:NFParticleEmitter;
 
-    private var weapon:Weapon;
+    private var weapon:Weapon = null;
 
-    public function new(?X:Float = 0, ?Y:Float = 0) {
+    private var stateData:PlayStateData;
+
+    public function new(?X:Float = 0, ?Y:Float = 0, StateData:PlayStateData) {
         super(X, Y);
+
+        stateData = StateData;
 
         maxVelocity.x = movementSpeed * 15;
         drag.x = 420;
+
+        mass = 100; // 100 kg
 
         // makeGraphic(14, 26, FlxColor.BLUE);
         loadGraphic(AssetPaths.rocketfighters_bob__png, true, 64, 64);
@@ -54,8 +63,13 @@ class Fighter extends GamePresence {
         effectEmitter = new NFParticleEmitter(40);
         subSprites.add(effectEmitter);
 
-        // add bazooka
+        addWeapons();
+    }
 
+    private function addWeapons() {
+        // add bazooka
+        weapon = new Bazooka();
+        subSprites.add(weapon);
     }
 
     public override function update(dt:Float) {

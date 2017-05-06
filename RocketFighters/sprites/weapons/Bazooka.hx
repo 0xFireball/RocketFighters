@@ -1,6 +1,8 @@
 package sprites.weapons;
 
 import flixel.*;
+import flixel.math.*;
+import flixel.util.*;
 
 class Bazooka extends Weapon {
 
@@ -8,6 +10,10 @@ class Bazooka extends Weapon {
         super(X, Y);
 
         loadGraphic(AssetPaths.rf_bazooka__png, true, 64, 64);
+    }
+
+    public override function fireFree(target:FlxPoint) {
+        
     }
 
 }

@@ -6,10 +6,12 @@ import flixel.math.*;
 
 import nf4.*;
 
+import states.game.data.*;
+
 class PlayerFighter extends Fighter {
 
-    public function new(?X:Float = 0, ?Y:Float = 0) {
-        super(X, Y);
+    public function new(?X:Float = 0, ?Y:Float = 0, StateData:PlayStateData) {
+        super(X, Y, StateData);
     }
 
     private override function movement() {
