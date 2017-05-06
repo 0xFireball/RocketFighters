@@ -18,7 +18,12 @@ class Fighter extends GamePresence {
         maxVelocity.x = movementSpeed * 15;
         drag.x = 420;
 
-        makeGraphic(14, 26, FlxColor.BLUE);
+        // makeGraphic(14, 26, FlxColor.BLUE);
+        loadGraphic(AssetPaths.rocketfighters_bob__png, true, 64, 64);
+        // offset.set(13, 7);
+        // setSize(7, 21);
+        offset.set(26, 14);
+        setSize(14, 42);
     }
 
     public override function update(dt:Float) {
