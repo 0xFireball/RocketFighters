@@ -115,7 +115,7 @@ class MenuState extends FlxState
 			if (FlxG.gamepads.lastActive.anyJustPressed([ Y ])) {
 				onClickSettings();
 			}
-			if (FlxG.gamepads.lastActive.anyJustPressed([ START ])) {
+			if (FlxG.gamepads.lastActive.anyJustPressed([ START, A ])) {
 				onClickPlay();
 			}
         }
