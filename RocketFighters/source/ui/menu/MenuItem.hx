@@ -21,7 +21,11 @@ class MenuItem extends FlxGroup {
     public var height(default, null):Float;
 
     private var selected:Bool = false;
-    private var activeTween:FlxTween;
+    private var persistentSelect:Bool = false;
+    
+    private var txTween:FlxTween;
+    private var bkTween:FlxTween;
+    private var olTween:FlxTween;
 
     private var callback:Void->Void;
 
@@ -66,20 +70,23 @@ class MenuItem extends FlxGroup {
         outline.x = backing.x - outlineSize;
     }
 
-    public function select() {
+    public function select(P:Bool = false) {
         if (selected) return;
         selected = true;
+        if (P) persistentSelect = true;
         onSelect();
     }
 
-    public function deselect() {
+    public function deselect(P:Bool = false) {
         if (!selected) return;
         selected = false;
+        if (P) persistentSelect = false;
         onDeselect();
     }
 
     public function disable() {
         enabled = false;
+        if (anyTweens()) cancelTweens();
         text.alpha = 0.5;
         backing.alpha = 0.7;
         outline.alpha = 0;
@@ -87,21 +94,36 @@ class MenuItem extends FlxGroup {
 
     public function enable() {
         enabled = true;
+        if (anyTweens()) cancelTweens();
         backing.alpha = 1.0;
         text.alpha = 1.0;
         outline.alpha = 0;
     }
 
-    private function onSelect() {
-        backing.alpha = 0.8;
-        text.alpha = 1.0;
-        outline.alpha = 0.6;
+    private function onSelect(Now:Bool = false) {
+        if (Now) {
+            backing.alpha = 0.8;
+            text.alpha = 1.0;
+            outline.alpha = 0.6;
+        } else {
+            if (anyTweens()) cancelTweens();
+            txTween = alphaTween(text, 1.0);
+            bkTween = alphaTween(backing, 0.8);
+            olTween = alphaTween(outline, 0.6);
+        }
     }
 
-    private function onDeselect() {
-        backing.alpha = 1.0;
-        text.alpha = 1.0;
-        outline.alpha = 0;
+    private function onDeselect(Now:Bool = false) {
+        if (Now) {
+            backing.alpha = 1.0;
+            text.alpha = 1.0;
+            outline.alpha = 0;
+        } else {
+            if (anyTweens()) cancelTweens();
+            txTween = alphaTween(text, 1.0);
+            bkTween = alphaTween(backing, 1.0);
+            olTween = alphaTween(outline, 0);
+        }
     }
 
     public function activate() {
@@ -118,8 +140,20 @@ class MenuItem extends FlxGroup {
         super.destroy();
     }
 
-    private function alphaTween(Spr:FlxSprite, Val:Float) {
-        FlxTween.tween(Spr, { alpha: Val }, 0.2, { ease: FlxEase.cubeIn });
+    private function anyTweens() {
+        return (txTween != null && !txTween.finished)
+            || (bkTween != null && !bkTween.finished)
+            || (olTween != null && !olTween.finished);
+    }
+
+    private function cancelTweens() {
+        if (txTween != null) txTween.cancel();
+        if (bkTween != null) bkTween.cancel();
+        if (olTween != null) olTween.cancel();
+    }
+
+    private function alphaTween(Spr:FlxSprite, Val:Float, Duration:Float = 0.2) {
+        return FlxTween.tween(Spr, { alpha: Val }, Duration, { ease: FlxEase.cubeIn });
     }
 
     private function isHovering():Bool {
@@ -151,7 +185,7 @@ class MenuItem extends FlxGroup {
     }
 
     public override function update(dt:Float) {
-        if (isHovering()) {
+        if (isHovering() || persistentSelect) {
             if (isPressing()) {
                 activate();
             } else {

@@ -118,9 +118,9 @@ class MenuItemGroup extends FlxTypedGroup<MenuItem> {
     private function highlightMenus() {
         for (itemId in 0...items.length) {
             if (!defocus && itemId == selectedIndex) {
-                items[itemId].select();
+                items[itemId].select(true);
             } else {
-                items[itemId].deselect();
+                items[itemId].deselect(true);
             }
         }
     }
