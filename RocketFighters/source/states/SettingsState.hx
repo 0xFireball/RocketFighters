@@ -48,7 +48,7 @@ class SettingsState extends FlxState
         );
 
 		var returnBtn = new MenuItem(
-            new SBNFText("Reset", 30),
+            new SBNFText("Return", 30),
             menuWidth,
             onReturn
         );
