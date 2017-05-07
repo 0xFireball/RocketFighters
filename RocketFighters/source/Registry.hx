@@ -33,6 +33,8 @@ class Registry {
     // color constants
     public static var backgroundColor:FlxColor = FlxColor.fromInt(0xFFA3A256);
 
+    public static var dimBackgroundColor:FlxColor = FlxColor.fromInt(0xFF51512E);
+
     public static var foregroundColor:FlxColor = FlxColor.fromInt(0xFFE8E676);
 
     public static var foregroundAccentColor:FlxColor = FlxColor.fromInt(0xFFFFFEB0);

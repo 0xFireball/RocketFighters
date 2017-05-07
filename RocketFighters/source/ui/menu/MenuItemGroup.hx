@@ -12,6 +12,8 @@ class MenuItemGroup extends FlxTypedGroup<MenuItem> {
     private var centerX:Float;
     private var startY:Float;
 
+    public var itemMargin:Float = 10;
+
     private var items:Array<MenuItem> = new Array<MenuItem>();
     private var currentOffset:Float = 0;
     
@@ -35,7 +37,7 @@ class MenuItemGroup extends FlxTypedGroup<MenuItem> {
     public function addItem(Item:MenuItem) {
         Item.updateTheme(foregroundColor, backgroundColor);
         Item.updatePosition(centerX, startY + currentOffset);
-        currentOffset += Item.height;
+        currentOffset += Item.height + itemMargin;
         items.push(Item);
         add(Item);
     }
