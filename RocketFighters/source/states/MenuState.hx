@@ -149,8 +149,8 @@ class MenuState extends FlxState
 	}
 
 	private function tryExitGame() {
-		#if (!next && desktop)
-		openfl.Lib.exit();
+		#if (desktop)
+		openfl.system.System.exit(0);
 		#end
 	}
 }
