@@ -36,7 +36,7 @@ class MenuItem extends FlxGroup {
 
         // create outline
         outline = new FlxSprite();
-        outline.makeGraphic(Std.int(backing.width + 2 * outlineSize), Std.int(backing.height + 2 * outlineSize), FlxColor.WHITE);
+        outline.makeGraphic(Std.int(width + 2 * outlineSize), Std.int(height + 2 * outlineSize), FlxColor.WHITE);
         outline.alpha = 0;
         add(outline);
 
