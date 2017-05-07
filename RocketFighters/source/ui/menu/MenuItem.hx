@@ -91,9 +91,22 @@ class MenuItem extends FlxGroup {
     }
 
     public override function update(dt:Float) {
-        var hover = FlxG.mouse.x > backing.x && FlxG.mouse.x < backing.x + backing.width
+        var hover:Bool = false;
+        var click:Bool = false;
+
+        #if !FLX_NO_MOUSE
+        hover = FlxG.mouse.x > backing.x && FlxG.mouse.x < backing.x + backing.width
             && FlxG.mouse.y > backing.y && FlxG.mouse.y < backing.y + backing.height;
-        var click = hover && FlxG.mouse.pressed;
+        click = hover && FlxG.mouse.pressed;
+        #end
+
+        #if !FLX_NO_TOUCH
+        var touch = FlxG.touches.getFirst();
+        if (touch != null) {
+            click = touch.x > backing.x && touch.x < backing.x + backing.width
+            && touch.y > backing.y && touch.y < backing.y + backing.height;
+        }
+        #end
         
         focus = hover || forceFocus;
 
