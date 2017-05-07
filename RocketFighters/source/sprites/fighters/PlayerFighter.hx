@@ -44,9 +44,9 @@ class PlayerFighter extends Fighter {
             }
             if (leftStick.x < 0) leftKey = true;
             if (leftStick.x > 0) rightKey = true;
-            upKey = gamepad.anyPressed([ A ]);
-            downKey = gamepad.anyPressed([ X ]);
-            primaryAction = gamepad.anyPressed([ B, RIGHT_TRIGGER_BUTTON, RIGHT_SHOULDER ]);
+            upKey = upKey || gamepad.anyPressed([ A ]);
+            downKey = downKey || gamepad.anyPressed([ X ]);
+            primaryAction = primaryAction || gamepad.anyPressed([ B, RIGHT_TRIGGER_BUTTON, RIGHT_SHOULDER ]);
 
             leftStick.put();
         }
