@@ -109,6 +109,8 @@ class MenuItem extends FlxGroup {
             menu_click();
             } else if (focus) {
                 menu_focus();
+            } else {
+                outline.alpha = 0;
             }
         } else {
             text.alpha = 0.5;

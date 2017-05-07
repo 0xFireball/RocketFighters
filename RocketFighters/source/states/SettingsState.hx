@@ -12,6 +12,7 @@ import nf4.effects.particles.*;
 import nf4.util.*;
 
 import ui.*;
+import ui.menu.*;
 
 class SettingsState extends FlxState
 {
@@ -29,17 +30,32 @@ class SettingsState extends FlxState
 		titleTx.screenCenter(FlxAxes.X);
 		add(titleTx);
 
-		var resetGameBtn = new SBNFButton(0, 420, "Reset Game", onResetSave);
-		resetGameBtn.screenCenter(FlxAxes.X);
-		add(resetGameBtn);
-		
-		var saveDataBtn = new SBNFButton(0, 480, "Save Game", onSaveData);
-		saveDataBtn.screenCenter(FlxAxes.X);
-		add(saveDataBtn);
+		var menuItems = new MenuItemGroup();
+		var menuWidth = 240;
+        menuItems.updatePosition(FlxG.width / 2, 340);
+        add(menuItems);
 
-		var returnBtn = new SBNFButton(0, 540, "Return", onReturn);
-		returnBtn.screenCenter(FlxAxes.X);
-		add(returnBtn);
+        var saveDataBtn = new MenuItem(
+            new SBNFText("Save Game", 30),
+            menuWidth,
+            onSaveData
+        );
+
+        var resetGameBtn = new MenuItem(
+            new SBNFText("Reset Game", 30),
+            menuWidth,
+            onResetSave
+        );
+
+		var returnBtn = new MenuItem(
+            new SBNFText("Reset", 30),
+            menuWidth,
+            onReturn
+        );
+
+        menuItems.addItem(saveDataBtn);
+        menuItems.addItem(resetGameBtn);
+        menuItems.addItem(returnBtn);
 
 		FlxG.camera.fade(bgColor, 0.4, true);
 
