@@ -38,7 +38,7 @@ class LevelSelectState extends FlxState {
             new SBNFText("Coming Soon", 30),
             menuWidth
         );
-        comingSoon1.enabled = false;
+        comingSoon1.disable();
 
         menuItems.addItem(lbpArenaMi);
         menuItems.addItem(comingSoon1);

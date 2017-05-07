@@ -93,7 +93,7 @@ class MenuItemGroup extends FlxTypedGroup<MenuItem> {
         }
         if (!defocus && sel) {
             // click
-            items[selectedIndex].menu_click();
+            items[selectedIndex].activate();
         }
 
         // fix selectedindex
@@ -116,11 +116,12 @@ class MenuItemGroup extends FlxTypedGroup<MenuItem> {
     }
 
     private function highlightMenus() {
-        for (menu in items) {
-            menu.forceFocus = false;
-        }
-        if (!defocus) {
-            items[selectedIndex].forceFocus = true;
+        for (itemId in 0...items.length) {
+            if (!defocus && itemId == selectedIndex) {
+                items[itemId].select();
+            } else {
+                items[itemId].deselect();
+            }
         }
     }
 
