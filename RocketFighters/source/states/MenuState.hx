@@ -102,7 +102,7 @@ class MenuState extends FlxState
 		if (FlxG.keys.anyJustPressed([ S ])) {
 			onClickSettings();
 		}
-		if (FlxG.keys.anyJustPressed([ ENTER ])) {
+		if (FlxG.keys.anyJustPressed([ ENTER, E, SPACE ])) {
 			onClickPlay();
 		}
 		if (FlxG.keys.anyJustPressed([ ESCAPE ])) {
@@ -138,7 +138,7 @@ class MenuState extends FlxState
 		FlxTween.tween(distortedTitle, { alpha: 1 }, 0.9, { ease: FlxEase.cubeIn });
 		// switch
 		FlxG.camera.fade(Registry.washoutColor, 0.8, false, function () {
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(new LevelSelectState());
 		});
 	}
 

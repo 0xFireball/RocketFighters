@@ -27,6 +27,13 @@ class PlayState extends FlxState {
 
     public var stateData:PlayStateData;
 
+    private var firstMapName:String = null;
+
+    public function new(FirstMapName:String) {
+        super();
+        firstMapName = FirstMapName; // e.g. "lbp_stage", `.tmx` auto-appended
+    }
+
     public override function create() {
 
         #if !FLX_NO_MOUSE
@@ -44,7 +51,7 @@ class PlayState extends FlxState {
         var backdrop = new FlxBackdrop(AssetPaths.backdrop__png, 0.2, 0.2);
         add(backdrop);
 
-        level = mapLoader.loadMap("lbp_stage", this);
+        level = mapLoader.loadMap(firstMapName, this);
         addLevel(level);
 
         fighters = new FlxTypedGroup<Fighter>();
