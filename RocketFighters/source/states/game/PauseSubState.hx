@@ -4,9 +4,9 @@ import flixel.*;
 import flixel.util.*;
 
 import nf4.ui.*;
+import nf4.ui.menu.*;
 
 import ui.*;
-import ui.menu.*;
 
 class PauseSubState extends FlxSubState {
 

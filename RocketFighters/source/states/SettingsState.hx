@@ -8,11 +8,11 @@ import flixel.effects.particles.*;
 import flixel.addons.effects.chainable.*;
 
 import nf4.ui.*;
+import nf4.ui.menu.*;
 import nf4.effects.particles.*;
 import nf4.util.*;
 
 import ui.*;
-import ui.menu.*;
 
 class SettingsState extends FlxState
 {

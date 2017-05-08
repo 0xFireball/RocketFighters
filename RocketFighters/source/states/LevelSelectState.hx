@@ -4,7 +4,7 @@ import flixel.*;
 import flixel.util.*;
 
 import ui.*;
-import ui.menu.*;
+import nf4.ui.menu.*;
 
 import states.game.*;
 
