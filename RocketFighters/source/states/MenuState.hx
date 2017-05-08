@@ -77,12 +77,16 @@ class MenuState extends FlxState
 		settingsBtn.x = FlxG.width - (settingsBtn.width + 32);
 		add(settingsBtn);
 
+		#if NF_NO_ANIMATION
 		FlxTween.color(credits, 0.9, FlxColor.fromRGBFloat(0.8, 0.1, 0.1), FlxColor.fromRGBFloat(0.98, 0.98, 0.98), { startDelay: 0.6, ease: FlxEase.cubeInOut });
 
 		FlxG.camera.fade(Registry.backgroundColor, 1.1, true, function () {
 			canPlay = true;
 		});
 		FlxG.camera.shake(0.01, 0.5);
+		#else
+		canPlay = true;
+		#end
 
 		super.create();
 	}
