@@ -69,7 +69,7 @@ class MenuState extends FlxState
 		version.x = FlxG.width - (version.width + 32);
 		add(version);
 
-		var playBtn = new SBNFButton(0, 350, "Play", onClickPlay);
+		var playBtn = new NFFlatButton(0, 350, 200, new SBNFText("Play", 32), onClickPlay);
 		playBtn.screenCenter(FlxAxes.X);
 		add(playBtn);
 
