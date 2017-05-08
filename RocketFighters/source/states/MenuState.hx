@@ -14,9 +14,9 @@ import nf4.util.*;
 import states.game.*;
 
 import ui.*;
+import ui.menu.*;
 
-class MenuState extends FlxState
-{
+class MenuState extends SBNFMenuState {
 	private var titleTx:NFText;
 
 	private var emitter:FlxEmitter;
@@ -69,13 +69,22 @@ class MenuState extends FlxState
 		version.x = FlxG.width - (version.width + 32);
 		add(version);
 
-		var playBtn = new NFFlatButton(0, 350, 200, new SBNFText("Play", 32), onClickPlay);
-		playBtn.screenCenter(FlxAxes.X);
-		add(playBtn);
+		// set up menu
 
-		// var settingsBtn = new SBNFButton(0, 32, "Settings", onClickSettings);
-		// settingsBtn.x = FlxG.width - (settingsBtn.width + 32);
-		// add(settingsBtn);
+		menuGroup.updatePosition(FlxG.width / 2, 340);
+        menuGroup.itemMargin = 12;
+        menuWidth = 240;
+        menuItemTextSize = 32;
+
+		menuItems.push({
+            text: "Play",
+            callback: onClickPlay
+        });
+
+		menuItems.push({
+            text: "Settings",
+            callback: onClickSettings
+        });
 
 		#if NF_NO_ANIMATION
 		FlxTween.color(credits, 0.9, FlxColor.fromRGBFloat(0.8, 0.1, 0.1), FlxColor.fromRGBFloat(0.98, 0.98, 0.98), { startDelay: 0.6, ease: FlxEase.cubeInOut });
@@ -103,27 +112,10 @@ class MenuState extends FlxState
 
 		// hotkeys
 		#if !FLX_NO_KEYBOARD
-		if (FlxG.keys.anyJustPressed([ S ])) {
-			onClickSettings();
-		}
-		if (FlxG.keys.anyJustPressed([ ENTER, E, SPACE ])) {
-			onClickPlay();
-		}
 		if (FlxG.keys.anyJustPressed([ ESCAPE ])) {
 			tryExitGame();
 		}
 		#end
-
-		#if !FLX_NO_GAMEPAD
-		if (FlxG.gamepads.lastActive != null) {
-			if (FlxG.gamepads.lastActive.anyJustPressed([ Y ])) {
-				onClickSettings();
-			}
-			if (FlxG.gamepads.lastActive.anyJustPressed([ START, A ])) {
-				onClickPlay();
-			}
-        }
-        #end
 
 		super.update(elapsed);
 	}
