@@ -15,7 +15,7 @@ typedef LevelInfo = {
 
 class LevelSelectState extends FlxState {
 
-    public var menuItems:MenuItemGroup;
+    public var menuItems:NFMenuItemGroup;
     private var menuWidth:Float = 300;
     private var selectEnabled:Bool = true;
 
@@ -23,7 +23,7 @@ class LevelSelectState extends FlxState {
 
         bgColor = Registry.dimBackgroundColor;
         
-        menuItems = new MenuItemGroup();
+        menuItems = new NFMenuItemGroup();
         menuItems.updatePosition(FlxG.width / 2, 180);
         add(menuItems);
 
@@ -37,7 +37,7 @@ class LevelSelectState extends FlxState {
 
         // bind and create levels
         for (level in levels) {
-            var lvMi = new MenuItem(
+            var lvMi = new NFMenuItem(
                 new SBNFText(level.name, 30),
                 menuWidth,
                 function() {
@@ -47,7 +47,7 @@ class LevelSelectState extends FlxState {
             menuItems.addItem(lvMi);
         }
 
-        var comingSoon1 = new MenuItem(
+        var comingSoon1 = new NFMenuItem(
             new SBNFText("Coming Soon", 30),
             menuWidth
         );

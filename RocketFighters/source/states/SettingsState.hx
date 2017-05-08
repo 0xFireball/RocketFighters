@@ -30,24 +30,24 @@ class SettingsState extends FlxState
 		titleTx.screenCenter(FlxAxes.X);
 		add(titleTx);
 
-		var menuItems = new MenuItemGroup();
+		var menuItems = new NFMenuItemGroup();
 		var menuWidth = 240;
         menuItems.updatePosition(FlxG.width / 2, 340);
         add(menuItems);
 
-        var saveDataBtn = new MenuItem(
+        var saveDataBtn = new NFMenuItem(
             new SBNFText("Save Game", 30),
             menuWidth,
             onSaveData
         );
 
-        var resetGameBtn = new MenuItem(
+        var resetGameBtn = new NFMenuItem(
             new SBNFText("Reset Game", 30),
             menuWidth,
             onResetSave
         );
 
-		var returnBtn = new MenuItem(
+		var returnBtn = new NFMenuItem(
             new SBNFText("Return", 30),
             menuWidth,
             onReturn

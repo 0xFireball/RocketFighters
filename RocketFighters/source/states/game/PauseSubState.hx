@@ -10,7 +10,7 @@ import ui.*;
 
 class PauseSubState extends FlxSubState {
 
-    public var menuItems:MenuItemGroup;
+    public var menuItems:NFMenuItemGroup;
     private var menuWidth:Float = 300;
 
     public override function create() {
@@ -32,17 +32,17 @@ class PauseSubState extends FlxSubState {
 		// returnBtn.screenCenter(FlxAxes.X);
 		// add(returnBtn);
 
-        menuItems = new MenuItemGroup();
+        menuItems = new NFMenuItemGroup();
         menuItems.updatePosition(FlxG.width / 2 + FlxG.camera.scroll.x, FlxG.camera.scroll.y + 440);
         add(menuItems);
 
-        var menuBtn = new MenuItem(
+        var menuBtn = new NFMenuItem(
             new SBNFText("Exit to Menu", 30),
             menuWidth,
             onReturnToMenu
         );
 
-        var returnBtn = new MenuItem(
+        var returnBtn = new NFMenuItem(
             new SBNFText("Return", 30),
             menuWidth,
             onReturnToGame
