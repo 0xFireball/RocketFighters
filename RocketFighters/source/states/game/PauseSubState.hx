@@ -24,14 +24,6 @@ class PauseSubState extends FlxSubState {
         levelText.x += FlxG.camera.scroll.x;
         add(levelText);
 
-        // var menuBtn = new SBNFButton(0, 480, "Exit to Menu", onReturnToMenu);
-		// menuBtn.screenCenter(FlxAxes.X);
-		// add(menuBtn);
-
-        // var returnBtn = new SBNFButton(0, 540, "Return", onReturnToGame);
-		// returnBtn.screenCenter(FlxAxes.X);
-		// add(returnBtn);
-
         menuItems = new NFMenuItemGroup();
         menuItems.updatePosition(FlxG.width / 2 + FlxG.camera.scroll.x, FlxG.camera.scroll.y + 440);
         add(menuItems);
