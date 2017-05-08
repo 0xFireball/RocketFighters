@@ -81,6 +81,9 @@ class MenuItemGroup extends FlxTypedGroup<MenuItem> {
         if (!defocus && dfc) {
             defocus = true;
         }
+        if (!defocus && (down || up)) {
+            items[selectedIndex].deselect(true);
+        }
         if (down) {
             defocus = false;
             selectedIndex++;
@@ -120,7 +123,7 @@ class MenuItemGroup extends FlxTypedGroup<MenuItem> {
             if (!defocus && itemId == selectedIndex) {
                 items[itemId].select(true);
             } else {
-                items[itemId].deselect(true);
+                // items[itemId].deselect(true);
             }
         }
     }
