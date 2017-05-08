@@ -96,6 +96,11 @@ class MenuState extends SBNFMenuState {
 		canPlay = true;
 		#end
 
+		// music
+		if (FlxG.sound.music == null) {
+			FlxG.sound.playMusic(AssetPaths.pp_asdf3__ogg, 1.0, true);
+		}
+
 		super.create();
 	}
 
