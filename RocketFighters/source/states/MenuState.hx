@@ -73,9 +73,9 @@ class MenuState extends FlxState
 		playBtn.screenCenter(FlxAxes.X);
 		add(playBtn);
 
-		var settingsBtn = new SBNFButton(0, 32, "Settings", onClickSettings);
-		settingsBtn.x = FlxG.width - (settingsBtn.width + 32);
-		add(settingsBtn);
+		// var settingsBtn = new SBNFButton(0, 32, "Settings", onClickSettings);
+		// settingsBtn.x = FlxG.width - (settingsBtn.width + 32);
+		// add(settingsBtn);
 
 		#if NF_NO_ANIMATION
 		FlxTween.color(credits, 0.9, FlxColor.fromRGBFloat(0.8, 0.1, 0.1), FlxColor.fromRGBFloat(0.98, 0.98, 0.98), { startDelay: 0.6, ease: FlxEase.cubeInOut });

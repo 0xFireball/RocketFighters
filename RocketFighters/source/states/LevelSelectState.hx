@@ -4,6 +4,7 @@ import flixel.*;
 import flixel.util.*;
 
 import ui.*;
+import ui.menu.*;
 import nf4.ui.menu.*;
 
 import states.game.*;
@@ -13,23 +14,22 @@ typedef LevelInfo = {
     file: String
 }
 
-class LevelSelectState extends FlxState {
+class LevelSelectState extends SBNFMenuState {
 
-    public var menuItems:NFMenuItemGroup;
-    private var menuWidth:Float = 300;
     private var selectEnabled:Bool = true;
 
     public override function create() {
 
         bgColor = Registry.dimBackgroundColor;
-        
-        menuItems = new NFMenuItemGroup();
-        menuItems.updatePosition(FlxG.width / 2, 180);
-        add(menuItems);
 
         var titleTx = new SBNFText(0, 100, "Select Stage", 40);
         titleTx.screenCenter(FlxAxes.X);
         add(titleTx);
+
+        menuGroup.updatePosition(FlxG.width / 2, 180);
+        menuGroup.itemMargin = 6;
+        menuWidth = 240;
+        menuItemTextSize = 30;
 
         var levels:Array<LevelInfo> = [
             { name: "LBP Arena", file: "lbp_stage" }
@@ -37,23 +37,18 @@ class LevelSelectState extends FlxState {
 
         // bind and create levels
         for (level in levels) {
-            var lvMi = new NFMenuItem(
-                new SBNFText(level.name, 30),
-                menuWidth,
-                function() {
+            menuItems.push({
+                text: level.name,
+                callback: function() {
                     onStageSelected(level.file);
                 }
-            );
-            menuItems.addItem(lvMi);
+            });
         }
 
-        var comingSoon1 = new NFMenuItem(
-            new SBNFText("Coming Soon", 30),
-            menuWidth
-        );
-        comingSoon1.disable();
-        
-        menuItems.addItem(comingSoon1);
+        menuItems.push({
+            text: "Coming Soon",
+            disabled: true
+        });
 
         FlxG.camera.fade(Registry.dimBackgroundColor, 0.4, true);
 
