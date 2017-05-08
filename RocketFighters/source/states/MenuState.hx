@@ -70,7 +70,6 @@ class MenuState extends SBNFMenuState {
 		add(version);
 
 		// set up menu
-
 		menuGroup.updatePosition(FlxG.width / 2, 340);
         menuGroup.itemMargin = 12;
         menuWidth = 240;

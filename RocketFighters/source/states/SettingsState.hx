@@ -13,9 +13,10 @@ import nf4.effects.particles.*;
 import nf4.util.*;
 
 import ui.*;
+import ui.menu.*;
 
-class SettingsState extends FlxState
-{
+class SettingsState extends SBNFMenuState {
+
 	override public function create():Void
 	{
 		#if !FLX_NO_MOUSE
@@ -30,32 +31,26 @@ class SettingsState extends FlxState
 		titleTx.screenCenter(FlxAxes.X);
 		add(titleTx);
 
-		var menuItems = new NFMenuItemGroup();
-		var menuWidth = 240;
-        menuItems.updatePosition(FlxG.width / 2, 340);
-        add(menuItems);
+		// set up menu
+		menuGroup.updatePosition(FlxG.width / 2, 340);
+        menuGroup.itemMargin = 12;
+        menuWidth = 240;
+        menuItemTextSize = 32;
 
-        var saveDataBtn = new NFMenuItem(
-            new SBNFText("Save Game", 30),
-            menuWidth,
-            onSaveData
-        );
+		menuItems.push({
+            text: "Save Game",
+            callback: onSaveData
+        });
 
-        var resetGameBtn = new NFMenuItem(
-            new SBNFText("Reset Game", 30),
-            menuWidth,
-            onResetSave
-        );
+		menuItems.push({
+            text: "Reset Game",
+            callback: onResetSave
+        });
 
-		var returnBtn = new NFMenuItem(
-            new SBNFText("Return", 30),
-            menuWidth,
-            onReturn
-        );
-
-        menuItems.addItem(saveDataBtn);
-        menuItems.addItem(resetGameBtn);
-        menuItems.addItem(returnBtn);
+		menuItems.push({
+            text: "Return",
+            callback: onReturn
+        });
 
 		FlxG.camera.fade(bgColor, 0.4, true);
 
