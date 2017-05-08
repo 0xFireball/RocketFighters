@@ -185,7 +185,7 @@ class MenuItem extends FlxGroup {
     }
 
     public override function update(dt:Float) {
-        if (isHovering() || persistentSelect) {
+        if (enabled && isHovering() || persistentSelect) {
             if (isPressing()) {
                 activate();
             } else {
