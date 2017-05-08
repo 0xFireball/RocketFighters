@@ -19,7 +19,7 @@ class PauseSubState extends FlxSubState {
 		FlxG.mouse.load(AssetPaths.diamond_mouse__png);
 		#end
 
-        var levelText = new SBNFText(0, 160, "paused", 48);
+        var levelText = new SBNFText(0, 160 + FlxG.camera.scroll.y, "paused", 48);
         levelText.screenCenter(FlxAxes.X);
         levelText.x += FlxG.camera.scroll.x;
         add(levelText);
