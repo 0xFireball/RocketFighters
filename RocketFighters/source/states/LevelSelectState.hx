@@ -8,6 +8,11 @@ import ui.menu.*;
 
 import states.game.*;
 
+typedef LevelInfo = {
+    name: String,
+    file: String
+}
+
 class LevelSelectState extends FlxState {
 
     public var menuItems:MenuItemGroup;
@@ -26,21 +31,28 @@ class LevelSelectState extends FlxState {
         titleTx.screenCenter(FlxAxes.X);
         add(titleTx);
 
-        var lbpArenaMi = new MenuItem(
-            new SBNFText("LBP Arena", 30),
-            menuWidth,
-            function() {
-                onStageSelected("lbp_stage");
-            }
-        );
+        var levels:Array<LevelInfo> = [
+            { name: "LBP Arena", file: "lbp_stage" }
+        ];
+
+        // bind and create levels
+        for (level in levels) {
+            var lvMi = new MenuItem(
+                new SBNFText(level.name, 30),
+                menuWidth,
+                function() {
+                    onStageSelected(level.file);
+                }
+            );
+            menuItems.addItem(lvMi);
+        }
 
         var comingSoon1 = new MenuItem(
             new SBNFText("Coming Soon", 30),
             menuWidth
         );
         comingSoon1.disable();
-
-        menuItems.addItem(lbpArenaMi);
+        
         menuItems.addItem(comingSoon1);
 
         FlxG.camera.fade(Registry.dimBackgroundColor, 0.4, true);
