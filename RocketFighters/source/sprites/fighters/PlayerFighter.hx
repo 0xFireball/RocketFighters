@@ -33,6 +33,7 @@ class PlayerFighter extends Fighter {
         #end
 
         #if !FLX_NO_GAMEPAD
+        
         var gamepad = FlxG.gamepads.lastActive;
         var nfGamepad = NFGamepad.get(gamepad);
         var stickDeadzone = 0.2;
@@ -63,10 +64,12 @@ class PlayerFighter extends Fighter {
         #if !FLX_NO_GAMEPAD
         var gamepad = NFGamepad.get(FlxG.gamepads.lastActive);
         var targetRadius:Float = 60; // pseudo-mouse position
-        var stickDeadzone = 0.2;
         if (gamepad != null) {
-            var rightStick = gamepad.getAxes(RIGHT_ANALOG_STICK, stickDeadzone);
-            FireTarget = rightStick.scale(targetRadius);
+            var rightStick = gamepad.getAxes(RIGHT_ANALOG_STICK);
+            if (FireTarget.x <= 0 && FireTarget.y <= 0) {
+                FireTarget.x = 1;
+            }
+            FireTarget = center.addPoint(rightStick.scale(targetRadius));
             rightStick.put();
         }
         gamepad = null;
