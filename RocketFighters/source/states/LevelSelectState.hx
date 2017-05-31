@@ -20,6 +20,18 @@ class LevelSelectState extends SBNFMenuState {
 
     public override function create() {
 
+        #if !FLX_NO_MOUSE
+		FlxG.mouse.visible = true;
+		FlxG.mouse.load(AssetPaths.mouse__png);
+		#end
+
+		#if (!FLX_NO_GAMEPAD && !FLX_NO_MOUSE)
+        // hide mouse if there's a mouse and an active gamepad
+        if (FlxG.gamepads.lastActive != null) {
+			FlxG.mouse.visible = false;
+        }
+        #end
+
         bgColor = Registry.dimBackgroundColor;
 
         var titleTx = new SBNFText(0, 100, "Select Stage", 40);

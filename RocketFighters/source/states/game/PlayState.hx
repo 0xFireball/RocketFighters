@@ -41,6 +41,13 @@ class PlayState extends FlxState {
 		FlxG.mouse.load(AssetPaths.diamond_mouse__png);
 		#end
 
+        #if (!FLX_NO_GAMEPAD && !FLX_NO_MOUSE)
+        // hide mouse if there's a mouse and an active gamepad
+        if (FlxG.gamepads.lastActive != null) {
+			FlxG.mouse.visible = false;
+        }
+        #end
+
         bgColor = Registry.backgroundColor;
 
         stateData = new PlayStateData();
